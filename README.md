@@ -12,7 +12,7 @@ Runs the app in the development mode.\
 Open [http://localhost:5001](http://localhost:5001) to view it in your browser.
 
 The page will reload when you make changes.\
-You may also see any lint errors in the console. ATM you need to run ther server at the same time as the front end (go into server and run "node server.js" and then npm start in the root folder) 
+You may also see any lint errors in the console. ATM you need to run ther server at the same time as the front end (go into server and run "nmp start" and then npm start in the root folder until backend is fully done ) 
 
 ### `npm test`
 
