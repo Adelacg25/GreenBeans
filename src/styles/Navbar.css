@@ -12,8 +12,13 @@
   font-weight: bold;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+}
+
 .nav-links a {
-  margin-left: 20px;
   text-decoration: none;
   color: white;
   font-weight: 500;
@@ -21,4 +26,10 @@
 
 .nav-links a:hover {
   text-decoration: underline;
+}
+
+.nav-links span {
+  font-weight: 500;
+  color: #fff;
+  margin-left: 20px; 
 }
