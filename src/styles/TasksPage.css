@@ -1,0 +1,14 @@
+.tasks-page {
+  padding: 20px;
+}
+
+.tasks-header {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #2e7d32;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+}
