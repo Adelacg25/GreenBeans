@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import "../styles/LoginPage.css";
+import axios from "axios";
 
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState(""); //  dummy
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Dummy login logic
-    const dummyUser = {
-      user_id: 1,
-      name: "Clarissa Garcia",
-      email: "cgarci11@trinity.edu",
-     
-    };
+    try {
+      const res = await axios.post("http://localhost:5001/users/login", {
+        email,
+        password
+      });
 
-    if (email === dummyUser.email) {
-      onLogin(dummyUser);
-      alert(`Logged in as ${dummyUser.name}`);
-    } else {
-      alert("Invalid email");
+      onLogin(res.data); // user_id, name, email
+      alert(`Logged in as ${res.data.name}`);
+
+    } catch (err) {
+
+      alert("Invalid email or password");
     }
   };
 
@@ -43,6 +43,7 @@ export default function LoginPage({ onLogin }) {
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            required
           />
         </div>
         <div className="form-actions">

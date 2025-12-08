@@ -1,14 +1,23 @@
 import React from "react";
 import "../styles/TaskCard.css";
 
-function TaskCard({ task }) {
+export default function TaskCard({ task }) {
   return (
     <div className="task-card">
-      <h3>{task.name}</h3>
-      <p>Due: {task.dueDate}</p>
-      <p>Status: {task.status}</p>
+      <div className="task-info">
+        <h4>{task.task_type}</h4>
+
+        <p><strong>Plant:</strong> {task.plant_name}</p>
+
+        <p>
+          <strong>Due:</strong>{" "}
+          {task.next_due
+            ? new Date(task.next_due).toLocaleDateString()
+            : "No date"}
+        </p>
+
+        <p><strong>Status:</strong> {task.status}</p>
+      </div>
     </div>
   );
 }
-
-export default TaskCard;

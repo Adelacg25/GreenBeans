@@ -4,12 +4,17 @@ import { getAllPlants } from "../services/api";
 import { PlantCard } from "../components/PlantCard";
 import "../styles/PlantsPage.css";
 
-export function PlantsPage() {
+export function PlantsPage({ user }) {
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
-    getAllPlants().then(data => setPlants(data));
-  }, []);
+  if (user?.user_id) {
+    getAllPlants(user.user_id).then(data => {
+      console.log("Plants response:", data);
+      setPlants(data);
+    });
+  }
+}, [user]);
 
   return (
     <div className="plants-container">
