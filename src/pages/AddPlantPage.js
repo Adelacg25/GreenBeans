@@ -11,6 +11,7 @@ export function AddPlantPage({ user }) {
     setResults(data);
   };
 
+  // idk i couldnt pull from the data so i just did this but it doesnt even work :(
   function inferWateringFromCareGuide(careTextArray) {
     if (!careTextArray || careTextArray.length === 0) return "Unknown";
     const text = careTextArray.join(" ").toLowerCase();
@@ -26,13 +27,14 @@ export function AddPlantPage({ user }) {
     <div className="add-plant-container">
       <h2>Add New Plant</h2>
 
-      <input
-        value={species}
-        onChange={(e) => setSpecies(e.target.value)}
-        placeholder="Search plant species..."
-      />
-
-      <button onClick={searchPlants}>Search</button>
+      <div className="search-bar">
+        <input
+          value={species}
+          onChange={(e) => setSpecies(e.target.value)}
+          placeholder="Search plant species..."
+        />
+        <button onClick={searchPlants}>Search</button>
+      </div>
 
       <div className="search-results">
         {results.map((plant) => (
@@ -46,7 +48,6 @@ export function AddPlantPage({ user }) {
                         
               let wateringDays = inferWateringFromCareGuide(careTextArray);
                         
-              // ⭐ DEFAULT WATERING FOR UNKNOWN CASES
               if (wateringDays === "Unknown") {
                 wateringDays = 7; 
               }
