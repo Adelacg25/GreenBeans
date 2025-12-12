@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getPlantDetails, getCareGuide, getAllPlants } from "../services/api";
+import { useParams, useNavigate } from "react-router-dom";
+import { getPlantDetails, getCareGuide, getAllPlants, deletePlant } from "../services/api";
 import "../styles/PlantDetailsPage.css";
 
 export function PlantDetailPage({ user }) {
-  const { plant_id } = useParams();  
+  const { plant_id } = useParams();
+  const navigate = useNavigate();
   const [plant, setPlant] = useState(null);
   const [details, setDetails] = useState(null);
   const [careGuide, setCareGuide] = useState(null);
@@ -25,33 +26,30 @@ export function PlantDetailPage({ user }) {
       const g = await getCareGuide(found.species_id);
       setCareGuide(g);
     }
-
     load();
   }, [plant_id, user]);
 
   if (!plant) return <h2>Loading...</h2>;
 
+  const handleDelete = async () => {
+    await deletePlant(plant.plant_id);
+    navigate("/plants");
+  };
+
   return (
     <div className="plant-details-container">
       <h2>{plant.plant_name}</h2>
 
-      <img 
-        className="hero-img" 
-        src={plant.image_url} 
-        alt={plant.plant_name} 
-      />
+      <img className="hero-img" src={plant.image_url} alt={plant.plant_name} />
 
       <div className="details-box">
         <p><strong>Species:</strong> {plant.species_name}</p>
         <p><strong>Water every:</strong> {plant.watering_frequency} days</p>
-
-        {/* ahhh*/}
         {details?.sunlight && (
           <p><strong>Light:</strong> {details.sunlight.join(", ")}</p>
         )}
       </div>
 
-      {/* idk */}
       {careGuide?.["care-guides"]?.length > 0 && (
         <div className="care-guide-box">
           <h3>Care Guide</h3>
@@ -60,6 +58,8 @@ export function PlantDetailPage({ user }) {
           ))}
         </div>
       )}
+
+      <button onClick={handleDelete} className="delete-btn">Delete Plant</button>
     </div>
   );
 }

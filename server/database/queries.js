@@ -33,10 +33,10 @@ export const plantQueries = {
   getPlantsForUser: (user_id) =>
   pool.query("SELECT * FROM plants WHERE user_id = $1", [user_id])
       .then(res => res.rows),
+
+  deletePlant: (plant_id) =>
+  pool.query("DELETE FROM plants WHERE plant_id = $1", [plant_id]),
 };
-
-
-
 
 // tasks
 export const taskQueries = {

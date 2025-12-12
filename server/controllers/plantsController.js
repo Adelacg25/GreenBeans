@@ -1,4 +1,3 @@
-
 import { plantQueries, taskQueries } from "../database/queries.js";
 import dayjs from "dayjs";  
 
@@ -33,4 +32,10 @@ export const getPlantsForUser = async (req, res) => {
   const { user_id } = req.params;
   const plants = await plantQueries.getPlantsForUser(user_id);
   res.json(plants);
+};
+
+export const deletePlant = async (req, res) => {
+  const { id } = req.params;
+  await plantQueries.deletePlant(id);
+  res.json({ success: true });
 };

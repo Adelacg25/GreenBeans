@@ -45,8 +45,6 @@ export const getCareGuide = async (id) => {
   return res.data;
 };
 
-export const getTasksForPlant = async (user_id) => {
-  const res = await API.get(`/tasks/user/${user_id}`);
-  return res.data;
+export const deletePlant = async (plant_id) => {
+  return API.delete(`/plants/${plant_id}`);
 };
-
